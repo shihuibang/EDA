@@ -1,0 +1,40 @@
+module runing(clk_50Mhz,rst_n,h,m,s,stop_clk,hou,min,sec);
+	input clk_50MHz,h,m,s,stop_clk,rst_n;
+	inout reg[5:0] hou,min,sec;
+	reg [24:0] counter;
+	reg clk_1hz;
+	
+	always @(posedge clk_50Mhz or negedge rst_n)begin
+	if(!rst_n)begin
+		counter <= 25'd0;
+		clk_1hz <= 0;
+	
+	end
+	else if(counter == 25000000) begin
+		counter <= 25'd0;
+		clk_1hz <= ~clk_1hz;
+	end
+	else
+		counter <= counter + 1;		
+end
+	always @(posedge clk_1hz )begin
+	
+		
+			if(!stop_clk) sec = sec + 1;
+			if(sec == 60)begin
+				sec = 0;
+				min = min + 1;
+			end
+			
+			if(min == 60)begin
+				min = 0;
+				hou = hou + 1;
+			end
+			
+			if(hou == 24)begin
+				hou = 0;
+			end
+	end
+	
+
+endmodule

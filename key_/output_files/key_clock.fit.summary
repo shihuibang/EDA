@@ -1,0 +1,16 @@
+Fitter Status : Successful - Sun May 21 12:01:38 2023
+Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Standard Edition
+Revision Name : key_clock
+Top-level Entity Name : key_clock
+Family : Cyclone IV E
+Device : EP4CE6F17C8
+Timing Models : Final
+Total logic elements : 894 / 6,272 ( 14 % )
+    Total combinational functions : 865 / 6,272 ( 14 % )
+    Dedicated logic registers : 314 / 6,272 ( 5 % )
+Total registers : 314
+Total pins : 47 / 180 ( 26 % )
+Total virtual pins : 0
+Total memory bits : 8,192 / 276,480 ( 3 % )
+Embedded Multiplier 9-bit elements : 0 / 30 ( 0 % )
+Total PLLs : 0 / 2 ( 0 % )

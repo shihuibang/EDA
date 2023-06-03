@@ -1,0 +1,19 @@
+module  key_clock(clk_50Mhz,rst_n,DIG,SEL,key_row,key_col);
+	input clk_50Mhz,rst_n;
+	input [3:0] key_col;
+	
+	output [7:0] DIG;
+	output [5:0] SEL;
+	output [3:0] key_row;
+   
+	wire [3:0] key_vale;
+	wire clk_4Khz;
+	wire clk_25hz;
+	wire clk_1hz;
+
+	clk_div_4Khz U1(clk_50Mhz,rst_n,clk_4Khz);
+	clk_div_25hz U4(clk_50Mhz,rst_n,clk_25hz,clk_1hz);
+	seg7_scan U2(clk_4Khz,clk_1hz,rst_n,key_vale,DIG,SEL);
+	key_scan U3(clk_4Khz,rst_n,key_col,key_row,key_vale);
+
+endmodule

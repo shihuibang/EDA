@@ -1,0 +1,1205 @@
+Analysis & Synthesis report for key_clock
+Sun May 21 12:01:23 2023
+Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. State Machine - |key_clock|music_top:music|state
+ 10. State Machine - |key_clock|seg7_scan:U2|current_state
+ 11. User-Specified and Inferred Latches
+ 12. Registers Removed During Synthesis
+ 13. Removed Registers Triggering Further Register Optimizations
+ 14. General Register Statistics
+ 15. Inverted Register Statistics
+ 16. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 17. Source assignments for music_top:music|music_rom:hz_rom|altsyncram:altsyncram_component|altsyncram_hka1:auto_generated
+ 18. Source assignments for music_top:music|music_time_rom:time_rom|altsyncram:altsyncram_component|altsyncram_uqa1:auto_generated
+ 19. Parameter Settings for User Entity Instance: clk_div_4Khz:U1
+ 20. Parameter Settings for User Entity Instance: clk_div_25hz:U4
+ 21. Parameter Settings for User Entity Instance: seg7_scan:U2
+ 22. Parameter Settings for User Entity Instance: music_top:music
+ 23. Parameter Settings for User Entity Instance: music_top:music|music_hz:hz0
+ 24. Parameter Settings for User Entity Instance: music_top:music|music_rom:hz_rom|altsyncram:altsyncram_component
+ 25. Parameter Settings for User Entity Instance: music_top:music|music_time_rom:time_rom|altsyncram:altsyncram_component
+ 26. Parameter Settings for Inferred Entity Instance: seg7_scan:U2|lpm_divide:Mod0
+ 27. Parameter Settings for Inferred Entity Instance: seg7_scan:U2|lpm_divide:Mod1
+ 28. Parameter Settings for Inferred Entity Instance: seg7_scan:U2|lpm_divide:Mod2
+ 29. Parameter Settings for Inferred Entity Instance: music_top:music|lpm_mult:Mult0
+ 30. altsyncram Parameter Settings by Entity Instance
+ 31. lpm_mult Parameter Settings by Entity Instance
+ 32. Port Connectivity Checks: "seg7_scan:U2"
+ 33. Port Connectivity Checks: "runing:U6"
+ 34. Port Connectivity Checks: "key_scan:U3"
+ 35. Port Connectivity Checks: "clk_div_25hz:U4"
+ 36. Post-Synthesis Netlist Statistics for Top Partition
+ 37. Elapsed Time Per Partition
+ 38. Analysis & Synthesis Messages
+ 39. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sun May 21 12:01:22 2023           ;
+; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Standard Edition ;
+; Revision Name                      ; key_clock                                       ;
+; Top-level Entity Name              ; key_clock                                       ;
+; Family                             ; Cyclone IV E                                    ;
+; Total logic elements               ; 932                                             ;
+;     Total combinational functions  ; 863                                             ;
+;     Dedicated logic registers      ; 314                                             ;
+; Total registers                    ; 314                                             ;
+; Total pins                         ; 47                                              ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 8,192                                           ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; EP4CE6F17C8        ;                    ;
+; Top-level entity name                                            ; key_clock          ; key_clock          ;
+; Family name                                                      ; Cyclone IV E       ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 4           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processor 3            ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
++----------------------------+-------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                            ;
++----------------------------------+-----------------+----------------------------------------+---------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                              ; Library ;
++----------------------------------+-----------------+----------------------------------------+---------------------------------------------------------------------------+---------+
+; clk_div_4Khz.v                   ; yes             ; User Verilog HDL File                  ; D:/051501/key_/clk_div_4Khz.v                                             ;         ;
+; key_clock.v                      ; yes             ; User Verilog HDL File                  ; D:/051501/key_/key_clock.v                                                ;         ;
+; seg7_scan.v                      ; yes             ; User Verilog HDL File                  ; D:/051501/key_/seg7_scan.v                                                ;         ;
+; key_scan.v                       ; yes             ; User Verilog HDL File                  ; D:/051501/key_/key_scan.v                                                 ;         ;
+; clk_div_25hz.v                   ; yes             ; User Verilog HDL File                  ; D:/051501/key_/clk_div_25hz.v                                             ;         ;
+; runing.v                         ; yes             ; User Verilog HDL File                  ; D:/051501/key_/runing.v                                                   ;         ;
+; music_top.v                      ; yes             ; Auto-Found Verilog HDL File            ; D:/051501/key_/music_top.v                                                ;         ;
+; music_hz.v                       ; yes             ; Auto-Found Verilog HDL File            ; D:/051501/key_/music_hz.v                                                 ;         ;
+; music_rom.v                      ; yes             ; Auto-Found Wizard-Generated File       ; D:/051501/key_/music_rom.v                                                ;         ;
+; altsyncram.tdf                   ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/altsyncram.tdf          ;         ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/stratix_ram_block.inc   ;         ;
+; lpm_mux.inc                      ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/lpm_mux.inc             ;         ;
+; lpm_decode.inc                   ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/lpm_decode.inc          ;         ;
+; aglobal180.inc                   ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/aglobal180.inc          ;         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/a_rdenreg.inc           ;         ;
+; altrom.inc                       ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/altrom.inc              ;         ;
+; altram.inc                       ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/altram.inc              ;         ;
+; altdpram.inc                     ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/altdpram.inc            ;         ;
+; db/altsyncram_hka1.tdf           ; yes             ; Auto-Generated Megafunction            ; D:/051501/key_/db/altsyncram_hka1.tdf                                     ;         ;
+; src/ipcore/music_hz.mif          ; yes             ; Auto-Found Memory Initialization File  ; D:/051501/key_/src/ipcore/music_hz.mif                                    ;         ;
+; music_time_rom.v                 ; yes             ; Auto-Found Wizard-Generated File       ; D:/051501/key_/music_time_rom.v                                           ;         ;
+; db/altsyncram_uqa1.tdf           ; yes             ; Auto-Generated Megafunction            ; D:/051501/key_/db/altsyncram_uqa1.tdf                                     ;         ;
+; src/ipcore/music_time.mif        ; yes             ; Auto-Found Memory Initialization File  ; D:/051501/key_/src/ipcore/music_time.mif                                  ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/lpm_divide.tdf          ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/abs_divider.inc         ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/sign_div_unsign.inc     ;         ;
+; db/lpm_divide_k9m.tdf            ; yes             ; Auto-Generated Megafunction            ; D:/051501/key_/db/lpm_divide_k9m.tdf                                      ;         ;
+; db/sign_div_unsign_9kh.tdf       ; yes             ; Auto-Generated Megafunction            ; D:/051501/key_/db/sign_div_unsign_9kh.tdf                                 ;         ;
+; db/alt_u_div_64f.tdf             ; yes             ; Auto-Generated Megafunction            ; D:/051501/key_/db/alt_u_div_64f.tdf                                       ;         ;
+; db/add_sub_7pc.tdf               ; yes             ; Auto-Generated Megafunction            ; D:/051501/key_/db/add_sub_7pc.tdf                                         ;         ;
+; db/add_sub_8pc.tdf               ; yes             ; Auto-Generated Megafunction            ; D:/051501/key_/db/add_sub_8pc.tdf                                         ;         ;
+; lpm_mult.tdf                     ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/lpm_mult.tdf            ;         ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/lpm_add_sub.inc         ;         ;
+; multcore.inc                     ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/multcore.inc            ;         ;
+; bypassff.inc                     ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/bypassff.inc            ;         ;
+; altshift.inc                     ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/altshift.inc            ;         ;
+; multcore.tdf                     ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/multcore.tdf            ;         ;
+; csa_add.inc                      ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/csa_add.inc             ;         ;
+; mpar_add.inc                     ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/mpar_add.inc            ;         ;
+; muleabz.inc                      ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/muleabz.inc             ;         ;
+; mul_lfrg.inc                     ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/mul_lfrg.inc            ;         ;
+; mul_boothc.inc                   ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/mul_boothc.inc          ;         ;
+; alt_ded_mult.inc                 ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/alt_ded_mult.inc        ;         ;
+; alt_ded_mult_y.inc               ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/alt_ded_mult_y.inc      ;         ;
+; dffpipe.inc                      ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/dffpipe.inc             ;         ;
+; mpar_add.tdf                     ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/mpar_add.tdf            ;         ;
+; lpm_add_sub.tdf                  ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/lpm_add_sub.tdf         ;         ;
+; addcore.inc                      ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/addcore.inc             ;         ;
+; look_add.inc                     ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/look_add.inc            ;         ;
+; alt_stratix_add_sub.inc          ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/alt_stratix_add_sub.inc ;         ;
+; db/add_sub_rgh.tdf               ; yes             ; Auto-Generated Megafunction            ; D:/051501/key_/db/add_sub_rgh.tdf                                         ;         ;
+; altshift.tdf                     ; yes             ; Megafunction                           ; c:/intelfpga/18.0/quartus/libraries/megafunctions/altshift.tdf            ;         ;
++----------------------------------+-----------------+----------------------------------------+---------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                   ;
++---------------------------------------------+-----------------+
+; Resource                                    ; Usage           ;
++---------------------------------------------+-----------------+
+; Estimated Total logic elements              ; 932             ;
+;                                             ;                 ;
+; Total combinational functions               ; 863             ;
+; Logic element usage by number of LUT inputs ;                 ;
+;     -- 4 input functions                    ; 368             ;
+;     -- 3 input functions                    ; 178             ;
+;     -- <=2 input functions                  ; 317             ;
+;                                             ;                 ;
+; Logic elements by mode                      ;                 ;
+;     -- normal mode                          ; 615             ;
+;     -- arithmetic mode                      ; 248             ;
+;                                             ;                 ;
+; Total registers                             ; 314             ;
+;     -- Dedicated logic registers            ; 314             ;
+;     -- I/O registers                        ; 0               ;
+;                                             ;                 ;
+; I/O pins                                    ; 47              ;
+; Total memory bits                           ; 8192            ;
+;                                             ;                 ;
+; Embedded Multiplier 9-bit elements          ; 0               ;
+;                                             ;                 ;
+; Maximum fan-out node                        ; clk_50Mhz~input ;
+; Maximum fan-out                             ; 304             ;
+; Total fan-out                               ; 3848            ;
+; Average fan-out                             ; 2.99            ;
++---------------------------------------------+-----------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                    ;
++----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                     ; Entity Name         ; Library Name ;
++----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; |key_clock                                   ; 863 (0)             ; 314 (0)                   ; 8192        ; 0            ; 0       ; 0         ; 47   ; 0            ; |key_clock                                                                                                              ; key_clock           ; work         ;
+;    |clk_div_4Khz:U1|                         ; 24 (24)             ; 13 (13)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|clk_div_4Khz:U1                                                                                              ; clk_div_4Khz        ; work         ;
+;    |key_scan:U3|                             ; 212 (212)           ; 98 (98)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|key_scan:U3                                                                                                  ; key_scan            ; work         ;
+;    |music_top:music|                         ; 296 (202)           ; 117 (117)                 ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|music_top:music                                                                                              ; music_top           ; work         ;
+;       |lpm_mult:Mult0|                       ; 28 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|music_top:music|lpm_mult:Mult0                                                                               ; lpm_mult            ; work         ;
+;          |multcore:mult_core|                ; 28 (28)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|music_top:music|lpm_mult:Mult0|multcore:mult_core                                                            ; multcore            ; work         ;
+;       |music_hz:hz0|                         ; 66 (66)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|music_top:music|music_hz:hz0                                                                                 ; music_hz            ; work         ;
+;       |music_rom:hz_rom|                     ; 0 (0)               ; 0 (0)                     ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|music_top:music|music_rom:hz_rom                                                                             ; music_rom           ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|music_top:music|music_rom:hz_rom|altsyncram:altsyncram_component                                             ; altsyncram          ; work         ;
+;             |altsyncram_hka1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|music_top:music|music_rom:hz_rom|altsyncram:altsyncram_component|altsyncram_hka1:auto_generated              ; altsyncram_hka1     ; work         ;
+;       |music_time_rom:time_rom|              ; 0 (0)               ; 0 (0)                     ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|music_top:music|music_time_rom:time_rom                                                                      ; music_time_rom      ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|music_top:music|music_time_rom:time_rom|altsyncram:altsyncram_component                                      ; altsyncram          ; work         ;
+;             |altsyncram_uqa1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|music_top:music|music_time_rom:time_rom|altsyncram:altsyncram_component|altsyncram_uqa1:auto_generated       ; altsyncram_uqa1     ; work         ;
+;    |runing:U6|                               ; 106 (106)           ; 62 (62)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|runing:U6                                                                                                    ; runing              ; work         ;
+;    |seg7_scan:U2|                            ; 225 (138)           ; 24 (24)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|seg7_scan:U2                                                                                                 ; seg7_scan           ; work         ;
+;       |lpm_divide:Mod0|                      ; 33 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|seg7_scan:U2|lpm_divide:Mod0                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_k9m:auto_generated|     ; 33 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|seg7_scan:U2|lpm_divide:Mod0|lpm_divide_k9m:auto_generated                                                   ; lpm_divide_k9m      ; work         ;
+;             |sign_div_unsign_9kh:divider|    ; 33 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|seg7_scan:U2|lpm_divide:Mod0|lpm_divide_k9m:auto_generated|sign_div_unsign_9kh:divider                       ; sign_div_unsign_9kh ; work         ;
+;                |alt_u_div_64f:divider|       ; 33 (33)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|seg7_scan:U2|lpm_divide:Mod0|lpm_divide_k9m:auto_generated|sign_div_unsign_9kh:divider|alt_u_div_64f:divider ; alt_u_div_64f       ; work         ;
+;       |lpm_divide:Mod1|                      ; 33 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|seg7_scan:U2|lpm_divide:Mod1                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_k9m:auto_generated|     ; 33 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|seg7_scan:U2|lpm_divide:Mod1|lpm_divide_k9m:auto_generated                                                   ; lpm_divide_k9m      ; work         ;
+;             |sign_div_unsign_9kh:divider|    ; 33 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|seg7_scan:U2|lpm_divide:Mod1|lpm_divide_k9m:auto_generated|sign_div_unsign_9kh:divider                       ; sign_div_unsign_9kh ; work         ;
+;                |alt_u_div_64f:divider|       ; 33 (33)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|seg7_scan:U2|lpm_divide:Mod1|lpm_divide_k9m:auto_generated|sign_div_unsign_9kh:divider|alt_u_div_64f:divider ; alt_u_div_64f       ; work         ;
+;       |lpm_divide:Mod2|                      ; 21 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|seg7_scan:U2|lpm_divide:Mod2                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_k9m:auto_generated|     ; 21 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|seg7_scan:U2|lpm_divide:Mod2|lpm_divide_k9m:auto_generated                                                   ; lpm_divide_k9m      ; work         ;
+;             |sign_div_unsign_9kh:divider|    ; 21 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|seg7_scan:U2|lpm_divide:Mod2|lpm_divide_k9m:auto_generated|sign_div_unsign_9kh:divider                       ; sign_div_unsign_9kh ; work         ;
+;                |alt_u_div_64f:divider|       ; 21 (21)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |key_clock|seg7_scan:U2|lpm_divide:Mod2|lpm_divide_k9m:auto_generated|sign_div_unsign_9kh:divider|alt_u_div_64f:divider ; alt_u_div_64f       ; work         ;
++----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                  ;
++-------------------------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+------------------------------+
+; Name                                                                                                              ; Type ; Mode ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF                          ;
++-------------------------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+------------------------------+
+; music_top:music|music_rom:hz_rom|altsyncram:altsyncram_component|altsyncram_hka1:auto_generated|ALTSYNCRAM        ; AUTO ; ROM  ; 512          ; 8            ; --           ; --           ; 4096 ; ../src/ipcore/music_hz.mif   ;
+; music_top:music|music_time_rom:time_rom|altsyncram:altsyncram_component|altsyncram_uqa1:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 512          ; 8            ; --           ; --           ; 4096 ; ../src/ipcore/music_time.mif ;
++-------------------------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+------------------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------+
+; State Machine - |key_clock|music_top:music|state                             ;
++-----------------+----------------+-----------------+------------+------------+
+; Name            ; state.PLAY_END ; state.PLAY_WAIT ; state.PLAY ; state.IDLE ;
++-----------------+----------------+-----------------+------------+------------+
+; state.IDLE      ; 0              ; 0               ; 0          ; 0          ;
+; state.PLAY      ; 0              ; 0               ; 1          ; 1          ;
+; state.PLAY_WAIT ; 0              ; 1               ; 0          ; 1          ;
+; state.PLAY_END  ; 1              ; 0               ; 0          ; 1          ;
++-----------------+----------------+-----------------+------------+------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |key_clock|seg7_scan:U2|current_state                                                                                                                                             ;
++------------------------+--------------------+------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+
+; Name                   ; current_state.SEL0 ; current_state.SEL_sec0 ; current_state.SEL_sec1 ; current_state.SEL_min0 ; current_state.SEL_min1 ; current_state.SEL_hou0 ; current_state.SEL_hou1 ;
++------------------------+--------------------+------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+
+; current_state.SEL0     ; 0                  ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ;
+; current_state.SEL_sec1 ; 1                  ; 0                      ; 1                      ; 0                      ; 0                      ; 0                      ; 0                      ;
+; current_state.SEL_min0 ; 1                  ; 0                      ; 0                      ; 1                      ; 0                      ; 0                      ; 0                      ;
+; current_state.SEL_min1 ; 1                  ; 0                      ; 0                      ; 0                      ; 1                      ; 0                      ; 0                      ;
+; current_state.SEL_hou0 ; 1                  ; 0                      ; 0                      ; 0                      ; 0                      ; 1                      ; 0                      ;
+; current_state.SEL_hou1 ; 1                  ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ; 1                      ;
+; current_state.SEL_sec0 ; 1                  ; 1                      ; 0                      ; 0                      ; 0                      ; 0                      ; 0                      ;
++------------------------+--------------------+------------------------+------------------------+------------------------+------------------------+------------------------+------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                            ;
++-----------------------------------------------------+---------------------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal             ; Free of Timing Hazards ;
++-----------------------------------------------------+---------------------------------+------------------------+
+; seg7_scan:U2|DIG_OUT[0]                             ; seg7_scan:U2|Selector15         ; yes                    ;
+; seg7_scan:U2|DIG_OUT[1]                             ; seg7_scan:U2|Selector15         ; yes                    ;
+; seg7_scan:U2|DIG_OUT[2]                             ; seg7_scan:U2|Selector15         ; yes                    ;
+; seg7_scan:U2|DIG_OUT[3]                             ; seg7_scan:U2|Selector15         ; yes                    ;
+; seg7_scan:U2|DIG_OUT[4]                             ; seg7_scan:U2|Selector15         ; yes                    ;
+; seg7_scan:U2|DIG_OUT[5]                             ; seg7_scan:U2|Selector15         ; yes                    ;
+; seg7_scan:U2|DIG_OUT[6]                             ; seg7_scan:U2|Selector15         ; yes                    ;
+; seg7_scan:U2|DIG_OUT[7]                             ; seg7_scan:U2|Selector59         ; yes                    ;
+; seg7_scan:U2|SEL[0]                                 ; seg7_scan:U2|current_state.SEL0 ; yes                    ;
+; seg7_scan:U2|SEL[1]                                 ; seg7_scan:U2|current_state.SEL0 ; yes                    ;
+; seg7_scan:U2|SEL[2]                                 ; seg7_scan:U2|current_state.SEL0 ; yes                    ;
+; seg7_scan:U2|SEL[3]                                 ; seg7_scan:U2|current_state.SEL0 ; yes                    ;
+; seg7_scan:U2|SEL[4]                                 ; seg7_scan:U2|current_state.SEL0 ; yes                    ;
+; seg7_scan:U2|SEL[5]                                 ; seg7_scan:U2|current_state.SEL0 ; yes                    ;
+; Number of user-specified and inferred latches = 14  ;                                 ;                        ;
++-----------------------------------------------------+---------------------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++-------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                  ;
++----------------------------------------+--------------------------------------------+
+; Register name                          ; Reason for Removal                         ;
++----------------------------------------+--------------------------------------------+
+; key_scan:U3|h[2,3]                     ; Merged with key_scan:U3|h[1]               ;
+; key_scan:U3|m[1..3]                    ; Merged with key_scan:U3|h[1]               ;
+; key_scan:U3|s[1..3]                    ; Merged with key_scan:U3|h[1]               ;
+; key_scan:U3|h[1]                       ; Stuck at GND due to stuck port data_in     ;
+; music_top:music|music_time[0]          ; Merged with music_top:music|music_time[1]  ;
+; music_top:music|music_time[1]          ; Merged with music_top:music|music_time[2]  ;
+; music_top:music|music_time[2]          ; Merged with music_top:music|music_time[3]  ;
+; runing:U6|hou[5]                       ; Stuck at GND due to stuck port data_in     ;
+; runing:U6|hou_show[5]                  ; Stuck at GND due to stuck port data_in     ;
+; seg7_scan:U2|hou_back[5]               ; Stuck at GND due to stuck port data_in     ;
+; music_top:music|state~4                ; Lost fanout                                ;
+; music_top:music|state~5                ; Lost fanout                                ;
+; music_top:music|music_time[3]          ; Merged with music_top:music|music_time[31] ;
+; clk_div_4Khz:U1|cnt[0]                 ; Merged with key_scan:U3|count[0]           ;
+; clk_div_4Khz:U1|cnt[1]                 ; Merged with key_scan:U3|count[1]           ;
+; Total Number of Removed Registers = 20 ;                                            ;
++----------------------------------------+--------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                    ;
++------------------+---------------------------+-------------------------------------------------+
+; Register name    ; Reason for Removal        ; Registers Removed due to This Register          ;
++------------------+---------------------------+-------------------------------------------------+
+; runing:U6|hou[5] ; Stuck at GND              ; runing:U6|hou_show[5], seg7_scan:U2|hou_back[5] ;
+;                  ; due to stuck port data_in ;                                                 ;
++------------------+---------------------------+-------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 314   ;
+; Number of registers using Synchronous Clear  ; 87    ;
+; Number of registers using Synchronous Load   ; 3     ;
+; Number of registers using Asynchronous Clear ; 221   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 60    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------+
+; Inverted Register Statistics                      ;
++-----------------------------------------+---------+
+; Inverted Register                       ; Fan out ;
++-----------------------------------------+---------+
+; music_top:music|music_time[9]           ; 1       ;
+; music_top:music|music_time[10]          ; 1       ;
+; music_top:music|music_time[11]          ; 1       ;
+; music_top:music|music_time[12]          ; 1       ;
+; music_top:music|music_time[13]          ; 1       ;
+; music_top:music|music_time[14]          ; 1       ;
+; music_top:music|music_time[15]          ; 1       ;
+; music_top:music|music_time[16]          ; 1       ;
+; music_top:music|music_time[17]          ; 1       ;
+; music_top:music|music_time[18]          ; 1       ;
+; music_top:music|music_time[19]          ; 1       ;
+; music_top:music|music_time[20]          ; 1       ;
+; music_top:music|music_time[21]          ; 1       ;
+; music_top:music|music_time[22]          ; 1       ;
+; music_top:music|music_time[23]          ; 1       ;
+; music_top:music|music_time[24]          ; 1       ;
+; music_top:music|music_time[25]          ; 1       ;
+; music_top:music|music_time[26]          ; 1       ;
+; music_top:music|music_time[27]          ; 1       ;
+; music_top:music|music_time[28]          ; 1       ;
+; music_top:music|music_time[29]          ; 1       ;
+; music_top:music|music_time[30]          ; 1       ;
+; key_scan:U3|key_out_x[0]                ; 1       ;
+; key_scan:U3|key_out_x[1]                ; 1       ;
+; key_scan:U3|key_out_x[2]                ; 1       ;
+; key_scan:U3|key_out_x[3]                ; 1       ;
+; music_top:music|buzzer                  ; 2       ;
+; music_top:music|music_time[31]          ; 3       ;
+; music_top:music|music_time[4]           ; 1       ;
+; music_top:music|music_time[5]           ; 1       ;
+; music_top:music|music_time[6]           ; 1       ;
+; music_top:music|music_time[7]           ; 1       ;
+; music_top:music|music_time[8]           ; 1       ;
+; runing:U6|c                             ; 1       ;
+; key_scan:U3|min[5]                      ; 2       ;
+; key_scan:U3|min[3]                      ; 2       ;
+; key_scan:U3|min[2]                      ; 2       ;
+; key_scan:U3|min[1]                      ; 2       ;
+; key_scan:U3|sec[0]                      ; 2       ;
+; key_scan:U3|sec[3]                      ; 2       ;
+; key_scan:U3|sec[4]                      ; 2       ;
+; key_scan:U3|sec[5]                      ; 2       ;
+; key_scan:U3|hou[3]                      ; 2       ;
+; key_scan:U3|hou[2]                      ; 2       ;
+; Total number of inverted registers = 44 ;         ;
++-----------------------------------------+---------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output              ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------+
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |key_clock|music_top:music|music_cnt[1] ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |key_clock|key_scan:U3|key_h1_scan[2]   ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |key_clock|key_scan:U3|key_h2_scan[0]   ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |key_clock|key_scan:U3|key_h3_scan[0]   ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |key_clock|key_scan:U3|key_h4_scan[3]   ;
+; 3:1                ; 20 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |key_clock|music_top:music|hz_cnt[19]   ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |key_clock|runing:U6|hou[2]             ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |key_clock|key_scan:U3|min[0]           ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |key_clock|key_scan:U3|sec[2]           ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |key_clock|key_scan:U3|hou[0]           ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 9 LEs                ; 3 LEs                  ; Yes        ; |key_clock|key_scan:U3|s[0]             ;
+; 8:1                ; 5 bits    ; 25 LEs        ; 20 LEs               ; 5 LEs                  ; Yes        ; |key_clock|key_scan:U3|stop_clk[0]      ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |key_clock|key_scan:U3|min[3]           ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |key_clock|key_scan:U3|sec[0]           ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |key_clock|key_scan:U3|hou[3]           ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |key_clock|key_scan:U3|key_out_x[1]     ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |key_clock|runing:U6|min                ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |key_clock|key_scan:U3|min              ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |key_clock|key_scan:U3|sec              ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |key_clock|key_scan:U3|hou              ;
+; 33:1               ; 7 bits    ; 154 LEs       ; 154 LEs              ; 0 LEs                  ; No         ; |key_clock|seg7_scan:U2|Selector28      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for music_top:music|music_rom:hz_rom|altsyncram:altsyncram_component|altsyncram_hka1:auto_generated ;
++---------------------------------+--------------------+------+----------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                       ;
++---------------------------------+--------------------+------+----------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                        ;
++---------------------------------+--------------------+------+----------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for music_top:music|music_time_rom:time_rom|altsyncram:altsyncram_component|altsyncram_uqa1:auto_generated ;
++---------------------------------+--------------------+------+-----------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                              ;
++---------------------------------+--------------------+------+-----------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                               ;
++---------------------------------+--------------------+------+-----------------------------------------------------------------+
+
+
++--------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: clk_div_4Khz:U1 ;
++----------------+-------+-------------------------------------+
+; Parameter Name ; Value ; Type                                ;
++----------------+-------+-------------------------------------+
+; NUM            ; 10000 ; Signed Integer                      ;
++----------------+-------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: clk_div_25hz:U4 ;
++----------------+---------+-----------------------------------+
+; Parameter Name ; Value   ; Type                              ;
++----------------+---------+-----------------------------------+
+; NUM            ; 2000000 ; Signed Integer                    ;
++----------------+---------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: seg7_scan:U2 ;
++----------------+--------+---------------------------------+
+; Parameter Name ; Value  ; Type                            ;
++----------------+--------+---------------------------------+
+; SEL0           ; 111111 ; Unsigned Binary                 ;
+; SEL_sec0       ; 011111 ; Unsigned Binary                 ;
+; SEL_sec1       ; 101111 ; Unsigned Binary                 ;
+; SEL_min0       ; 110111 ; Unsigned Binary                 ;
+; SEL_min1       ; 111011 ; Unsigned Binary                 ;
+; SEL_hou0       ; 111101 ; Unsigned Binary                 ;
+; SEL_hou1       ; 111110 ; Unsigned Binary                 ;
++----------------+--------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: music_top:music        ;
++----------------+----------------------------------+-----------------+
+; Parameter Name ; Value                            ; Type            ;
++----------------+----------------------------------+-----------------+
+; CLK_FRE        ; 50                               ; Signed Integer  ;
+; music_len      ; 00000000000000000000000001001110 ; Unsigned Binary ;
+; IDLE           ; 00                               ; Unsigned Binary ;
+; PLAY           ; 01                               ; Unsigned Binary ;
+; PLAY_WAIT      ; 10                               ; Unsigned Binary ;
+; PLAY_END       ; 11                               ; Unsigned Binary ;
++----------------+----------------------------------+-----------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: music_top:music|music_hz:hz0 ;
++----------------+-------+--------------------------------------------------+
+; Parameter Name ; Value ; Type                                             ;
++----------------+-------+--------------------------------------------------+
+; CLK_FRE        ; 50    ; Signed Integer                                   ;
++----------------+-------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: music_top:music|music_rom:hz_rom|altsyncram:altsyncram_component ;
++------------------------------------+----------------------------+---------------------------------------------+
+; Parameter Name                     ; Value                      ; Type                                        ;
++------------------------------------+----------------------------+---------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                          ; Untyped                                     ;
+; AUTO_CARRY_CHAINS                  ; ON                         ; AUTO_CARRY                                  ;
+; IGNORE_CARRY_BUFFERS               ; OFF                        ; IGNORE_CARRY                                ;
+; AUTO_CASCADE_CHAINS                ; ON                         ; AUTO_CASCADE                                ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                        ; IGNORE_CASCADE                              ;
+; WIDTH_BYTEENA                      ; 1                          ; Untyped                                     ;
+; OPERATION_MODE                     ; ROM                        ; Untyped                                     ;
+; WIDTH_A                            ; 8                          ; Signed Integer                              ;
+; WIDTHAD_A                          ; 9                          ; Signed Integer                              ;
+; NUMWORDS_A                         ; 512                        ; Signed Integer                              ;
+; OUTDATA_REG_A                      ; CLOCK0                     ; Untyped                                     ;
+; ADDRESS_ACLR_A                     ; NONE                       ; Untyped                                     ;
+; OUTDATA_ACLR_A                     ; NONE                       ; Untyped                                     ;
+; WRCONTROL_ACLR_A                   ; NONE                       ; Untyped                                     ;
+; INDATA_ACLR_A                      ; NONE                       ; Untyped                                     ;
+; BYTEENA_ACLR_A                     ; NONE                       ; Untyped                                     ;
+; WIDTH_B                            ; 1                          ; Untyped                                     ;
+; WIDTHAD_B                          ; 1                          ; Untyped                                     ;
+; NUMWORDS_B                         ; 1                          ; Untyped                                     ;
+; INDATA_REG_B                       ; CLOCK1                     ; Untyped                                     ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1                     ; Untyped                                     ;
+; RDCONTROL_REG_B                    ; CLOCK1                     ; Untyped                                     ;
+; ADDRESS_REG_B                      ; CLOCK1                     ; Untyped                                     ;
+; OUTDATA_REG_B                      ; UNREGISTERED               ; Untyped                                     ;
+; BYTEENA_REG_B                      ; CLOCK1                     ; Untyped                                     ;
+; INDATA_ACLR_B                      ; NONE                       ; Untyped                                     ;
+; WRCONTROL_ACLR_B                   ; NONE                       ; Untyped                                     ;
+; ADDRESS_ACLR_B                     ; NONE                       ; Untyped                                     ;
+; OUTDATA_ACLR_B                     ; NONE                       ; Untyped                                     ;
+; RDCONTROL_ACLR_B                   ; NONE                       ; Untyped                                     ;
+; BYTEENA_ACLR_B                     ; NONE                       ; Untyped                                     ;
+; WIDTH_BYTEENA_A                    ; 1                          ; Signed Integer                              ;
+; WIDTH_BYTEENA_B                    ; 1                          ; Untyped                                     ;
+; RAM_BLOCK_TYPE                     ; AUTO                       ; Untyped                                     ;
+; BYTE_SIZE                          ; 8                          ; Untyped                                     ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                  ; Untyped                                     ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ       ; Untyped                                     ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ       ; Untyped                                     ;
+; INIT_FILE                          ; ../src/ipcore/music_hz.mif ; Untyped                                     ;
+; INIT_FILE_LAYOUT                   ; PORT_A                     ; Untyped                                     ;
+; MAXIMUM_DEPTH                      ; 0                          ; Untyped                                     ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS                     ; Untyped                                     ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL                     ; Untyped                                     ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS                     ; Untyped                                     ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL                     ; Untyped                                     ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN            ; Untyped                                     ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN            ; Untyped                                     ;
+; ENABLE_ECC                         ; FALSE                      ; Untyped                                     ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                      ; Untyped                                     ;
+; WIDTH_ECCSTATUS                    ; 3                          ; Untyped                                     ;
+; DEVICE_FAMILY                      ; Cyclone IV E               ; Untyped                                     ;
+; CBXI_PARAMETER                     ; altsyncram_hka1            ; Untyped                                     ;
++------------------------------------+----------------------------+---------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: music_top:music|music_time_rom:time_rom|altsyncram:altsyncram_component ;
++------------------------------------+------------------------------+--------------------------------------------------+
+; Parameter Name                     ; Value                        ; Type                                             ;
++------------------------------------+------------------------------+--------------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                            ; Untyped                                          ;
+; AUTO_CARRY_CHAINS                  ; ON                           ; AUTO_CARRY                                       ;
+; IGNORE_CARRY_BUFFERS               ; OFF                          ; IGNORE_CARRY                                     ;
+; AUTO_CASCADE_CHAINS                ; ON                           ; AUTO_CASCADE                                     ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                          ; IGNORE_CASCADE                                   ;
+; WIDTH_BYTEENA                      ; 1                            ; Untyped                                          ;
+; OPERATION_MODE                     ; ROM                          ; Untyped                                          ;
+; WIDTH_A                            ; 8                            ; Signed Integer                                   ;
+; WIDTHAD_A                          ; 9                            ; Signed Integer                                   ;
+; NUMWORDS_A                         ; 512                          ; Signed Integer                                   ;
+; OUTDATA_REG_A                      ; CLOCK0                       ; Untyped                                          ;
+; ADDRESS_ACLR_A                     ; NONE                         ; Untyped                                          ;
+; OUTDATA_ACLR_A                     ; NONE                         ; Untyped                                          ;
+; WRCONTROL_ACLR_A                   ; NONE                         ; Untyped                                          ;
+; INDATA_ACLR_A                      ; NONE                         ; Untyped                                          ;
+; BYTEENA_ACLR_A                     ; NONE                         ; Untyped                                          ;
+; WIDTH_B                            ; 1                            ; Untyped                                          ;
+; WIDTHAD_B                          ; 1                            ; Untyped                                          ;
+; NUMWORDS_B                         ; 1                            ; Untyped                                          ;
+; INDATA_REG_B                       ; CLOCK1                       ; Untyped                                          ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1                       ; Untyped                                          ;
+; RDCONTROL_REG_B                    ; CLOCK1                       ; Untyped                                          ;
+; ADDRESS_REG_B                      ; CLOCK1                       ; Untyped                                          ;
+; OUTDATA_REG_B                      ; UNREGISTERED                 ; Untyped                                          ;
+; BYTEENA_REG_B                      ; CLOCK1                       ; Untyped                                          ;
+; INDATA_ACLR_B                      ; NONE                         ; Untyped                                          ;
+; WRCONTROL_ACLR_B                   ; NONE                         ; Untyped                                          ;
+; ADDRESS_ACLR_B                     ; NONE                         ; Untyped                                          ;
+; OUTDATA_ACLR_B                     ; NONE                         ; Untyped                                          ;
+; RDCONTROL_ACLR_B                   ; NONE                         ; Untyped                                          ;
+; BYTEENA_ACLR_B                     ; NONE                         ; Untyped                                          ;
+; WIDTH_BYTEENA_A                    ; 1                            ; Signed Integer                                   ;
+; WIDTH_BYTEENA_B                    ; 1                            ; Untyped                                          ;
+; RAM_BLOCK_TYPE                     ; AUTO                         ; Untyped                                          ;
+; BYTE_SIZE                          ; 8                            ; Untyped                                          ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                    ; Untyped                                          ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ         ; Untyped                                          ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ         ; Untyped                                          ;
+; INIT_FILE                          ; ../src/ipcore/music_time.mif ; Untyped                                          ;
+; INIT_FILE_LAYOUT                   ; PORT_A                       ; Untyped                                          ;
+; MAXIMUM_DEPTH                      ; 0                            ; Untyped                                          ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS                       ; Untyped                                          ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL                       ; Untyped                                          ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS                       ; Untyped                                          ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL                       ; Untyped                                          ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN              ; Untyped                                          ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN              ; Untyped                                          ;
+; ENABLE_ECC                         ; FALSE                        ; Untyped                                          ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                        ; Untyped                                          ;
+; WIDTH_ECCSTATUS                    ; 3                            ; Untyped                                          ;
+; DEVICE_FAMILY                      ; Cyclone IV E                 ; Untyped                                          ;
+; CBXI_PARAMETER                     ; altsyncram_uqa1              ; Untyped                                          ;
++------------------------------------+------------------------------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: seg7_scan:U2|lpm_divide:Mod0 ;
++------------------------+----------------+-------------------------------------+
+; Parameter Name         ; Value          ; Type                                ;
++------------------------+----------------+-------------------------------------+
+; LPM_WIDTHN             ; 6              ; Untyped                             ;
+; LPM_WIDTHD             ; 4              ; Untyped                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                             ;
+; CBXI_PARAMETER         ; lpm_divide_k9m ; Untyped                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                      ;
++------------------------+----------------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: seg7_scan:U2|lpm_divide:Mod1 ;
++------------------------+----------------+-------------------------------------+
+; Parameter Name         ; Value          ; Type                                ;
++------------------------+----------------+-------------------------------------+
+; LPM_WIDTHN             ; 6              ; Untyped                             ;
+; LPM_WIDTHD             ; 4              ; Untyped                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                             ;
+; CBXI_PARAMETER         ; lpm_divide_k9m ; Untyped                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                      ;
++------------------------+----------------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: seg7_scan:U2|lpm_divide:Mod2 ;
++------------------------+----------------+-------------------------------------+
+; Parameter Name         ; Value          ; Type                                ;
++------------------------+----------------+-------------------------------------+
+; LPM_WIDTHN             ; 6              ; Untyped                             ;
+; LPM_WIDTHD             ; 4              ; Untyped                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                             ;
+; CBXI_PARAMETER         ; lpm_divide_k9m ; Untyped                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                      ;
++------------------------+----------------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: music_top:music|lpm_mult:Mult0     ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8            ; Untyped             ;
+; LPM_WIDTHB                                     ; 23           ; Untyped             ;
+; LPM_WIDTHP                                     ; 31           ; Untyped             ;
+; LPM_WIDTHR                                     ; 31           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED     ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; YES          ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; NOTHING      ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                                                    ;
++-------------------------------------------+-------------------------------------------------------------------------+
+; Name                                      ; Value                                                                   ;
++-------------------------------------------+-------------------------------------------------------------------------+
+; Number of entity instances                ; 2                                                                       ;
+; Entity Instance                           ; music_top:music|music_rom:hz_rom|altsyncram:altsyncram_component        ;
+;     -- OPERATION_MODE                     ; ROM                                                                     ;
+;     -- WIDTH_A                            ; 8                                                                       ;
+;     -- NUMWORDS_A                         ; 512                                                                     ;
+;     -- OUTDATA_REG_A                      ; CLOCK0                                                                  ;
+;     -- WIDTH_B                            ; 1                                                                       ;
+;     -- NUMWORDS_B                         ; 1                                                                       ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                                  ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                            ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                                    ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                               ;
+; Entity Instance                           ; music_top:music|music_time_rom:time_rom|altsyncram:altsyncram_component ;
+;     -- OPERATION_MODE                     ; ROM                                                                     ;
+;     -- WIDTH_A                            ; 8                                                                       ;
+;     -- NUMWORDS_A                         ; 512                                                                     ;
+;     -- OUTDATA_REG_A                      ; CLOCK0                                                                  ;
+;     -- WIDTH_B                            ; 1                                                                       ;
+;     -- NUMWORDS_B                         ; 1                                                                       ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                                  ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                            ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                                    ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                               ;
++-------------------------------------------+-------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------+
+; lpm_mult Parameter Settings by Entity Instance                         ;
++---------------------------------------+--------------------------------+
+; Name                                  ; Value                          ;
++---------------------------------------+--------------------------------+
+; Number of entity instances            ; 1                              ;
+; Entity Instance                       ; music_top:music|lpm_mult:Mult0 ;
+;     -- LPM_WIDTHA                     ; 8                              ;
+;     -- LPM_WIDTHB                     ; 23                             ;
+;     -- LPM_WIDTHP                     ; 31                             ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                       ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                             ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                            ;
+;     -- USE_EAB                        ; OFF                            ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                           ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                             ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                             ;
++---------------------------------------+--------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "seg7_scan:U2"                                                                                                                                     ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                                                                                                         ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+; key_val ; Input ; Warning  ; Input port expression (1 bits) is smaller than the input port (4 bits) it drives.  Extra input bit(s) "key_val[3..1]" will be connected to GND. ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "runing:U6"                                                                                                                                                                          ;
++----------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port     ; Type  ; Severity ; Details                                                                                                                                                                          ;
++----------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; h        ; Input ; Warning  ; Input port expression (4 bits) is wider than the input port (1 bits) it drives.  The 3 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; m        ; Input ; Warning  ; Input port expression (4 bits) is wider than the input port (1 bits) it drives.  The 3 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; s        ; Input ; Warning  ; Input port expression (4 bits) is wider than the input port (1 bits) it drives.  The 3 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; stop_clk ; Input ; Warning  ; Input port expression (4 bits) is wider than the input port (1 bits) it drives.  The 3 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
++----------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "key_scan:U3"                                                                                  ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port           ; Type   ; Severity ; Details                                                                             ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+; stop_clk[3..1] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; h[3..1]        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; m[3..1]        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; s[3..1]        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "clk_div_25hz:U4"                                                                        ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; clk_25hz ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; clk_1hz  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 47                          ;
+; cycloneiii_ff         ; 314                         ;
+;     CLR               ; 130                         ;
+;     CLR SCLR          ; 52                          ;
+;     CLR SCLR SLD      ; 3                           ;
+;     ENA               ; 24                          ;
+;     ENA CLR           ; 4                           ;
+;     ENA CLR SCLR      ; 32                          ;
+;     plain             ; 69                          ;
+; cycloneiii_lcell_comb ; 868                         ;
+;     arith             ; 248                         ;
+;         1 data inputs ; 2                           ;
+;         2 data inputs ; 175                         ;
+;         3 data inputs ; 71                          ;
+;     normal            ; 620                         ;
+;         0 data inputs ; 9                           ;
+;         1 data inputs ; 23                          ;
+;         2 data inputs ; 113                         ;
+;         3 data inputs ; 107                         ;
+;         4 data inputs ; 368                         ;
+; cycloneiii_ram_block  ; 16                          ;
+;                       ;                             ;
+; Max LUT depth         ; 12.10                       ;
+; Average LUT depth     ; 5.70                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:04     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
+    Info: Processing started: Sun May 21 12:00:59 2023
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off key_clock -c key_clock
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file clk_div_4khz.v
+    Info (12023): Found entity 1: clk_div_4Khz File: D:/051501/key_/clk_div_4Khz.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file key_clock.v
+    Info (12023): Found entity 1: key_clock File: D:/051501/key_/key_clock.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file seg7_scan.v
+    Info (12023): Found entity 1: seg7_scan File: D:/051501/key_/seg7_scan.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file key_scan.v
+    Info (12023): Found entity 1: key_scan File: D:/051501/key_/key_scan.v Line: 6
+Info (12021): Found 1 design units, including 1 entities, in source file clk_div_25hz.v
+    Info (12023): Found entity 1: clk_div_25hz File: D:/051501/key_/clk_div_25hz.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file control.v
+    Info (12023): Found entity 1: control File: D:/051501/key_/control.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file runing.v
+    Info (12023): Found entity 1: runing File: D:/051501/key_/runing.v Line: 1
+Warning (10236): Verilog HDL Implicit Net warning at key_clock.v(30): created implicit net for "key_vale" File: D:/051501/key_/key_clock.v Line: 30
+Info (12127): Elaborating entity "key_clock" for the top level hierarchy
+Info (12128): Elaborating entity "clk_div_4Khz" for hierarchy "clk_div_4Khz:U1" File: D:/051501/key_/key_clock.v Line: 20
+Info (12128): Elaborating entity "clk_div_25hz" for hierarchy "clk_div_25hz:U4" File: D:/051501/key_/key_clock.v Line: 22
+Warning (10230): Verilog HDL assignment warning at clk_div_25hz.v(34): truncated value with size 32 to match size of target (25) File: D:/051501/key_/clk_div_25hz.v Line: 34
+Info (12128): Elaborating entity "key_scan" for hierarchy "key_scan:U3" File: D:/051501/key_/key_clock.v Line: 24
+Warning (10230): Verilog HDL assignment warning at key_scan.v(180): truncated value with size 32 to match size of target (6) File: D:/051501/key_/key_scan.v Line: 180
+Warning (10230): Verilog HDL assignment warning at key_scan.v(181): truncated value with size 32 to match size of target (6) File: D:/051501/key_/key_scan.v Line: 181
+Warning (10230): Verilog HDL assignment warning at key_scan.v(182): truncated value with size 32 to match size of target (6) File: D:/051501/key_/key_scan.v Line: 182
+Warning (10230): Verilog HDL assignment warning at key_scan.v(190): truncated value with size 32 to match size of target (6) File: D:/051501/key_/key_scan.v Line: 190
+Warning (10230): Verilog HDL assignment warning at key_scan.v(191): truncated value with size 32 to match size of target (6) File: D:/051501/key_/key_scan.v Line: 191
+Warning (10230): Verilog HDL assignment warning at key_scan.v(192): truncated value with size 32 to match size of target (6) File: D:/051501/key_/key_scan.v Line: 192
+Info (12128): Elaborating entity "runing" for hierarchy "runing:U6" File: D:/051501/key_/key_clock.v Line: 28
+Warning (10230): Verilog HDL assignment warning at runing.v(23): truncated value with size 32 to match size of target (25) File: D:/051501/key_/runing.v Line: 23
+Warning (10230): Verilog HDL assignment warning at runing.v(46): truncated value with size 32 to match size of target (6) File: D:/051501/key_/runing.v Line: 46
+Warning (10230): Verilog HDL assignment warning at runing.v(49): truncated value with size 32 to match size of target (6) File: D:/051501/key_/runing.v Line: 49
+Warning (10230): Verilog HDL assignment warning at runing.v(55): truncated value with size 32 to match size of target (6) File: D:/051501/key_/runing.v Line: 55
+Info (12128): Elaborating entity "seg7_scan" for hierarchy "seg7_scan:U2" File: D:/051501/key_/key_clock.v Line: 30
+Warning (10235): Verilog HDL Always Construct warning at seg7_scan.v(155): variable "sec" is read inside the Always Construct but isn't in the Always Construct's Event Control File: D:/051501/key_/seg7_scan.v Line: 155
+Warning (10230): Verilog HDL assignment warning at seg7_scan.v(155): truncated value with size 32 to match size of target (7) File: D:/051501/key_/seg7_scan.v Line: 155
+Warning (10270): Verilog HDL Case Statement warning at seg7_scan.v(157): incomplete case statement has no default case item File: D:/051501/key_/seg7_scan.v Line: 157
+Warning (10235): Verilog HDL Always Construct warning at seg7_scan.v(172): variable "sec" is read inside the Always Construct but isn't in the Always Construct's Event Control File: D:/051501/key_/seg7_scan.v Line: 172
+Warning (10230): Verilog HDL assignment warning at seg7_scan.v(172): truncated value with size 32 to match size of target (7) File: D:/051501/key_/seg7_scan.v Line: 172
+Warning (10270): Verilog HDL Case Statement warning at seg7_scan.v(174): incomplete case statement has no default case item File: D:/051501/key_/seg7_scan.v Line: 174
+Warning (10235): Verilog HDL Always Construct warning at seg7_scan.v(189): variable "min" is read inside the Always Construct but isn't in the Always Construct's Event Control File: D:/051501/key_/seg7_scan.v Line: 189
+Warning (10230): Verilog HDL assignment warning at seg7_scan.v(189): truncated value with size 32 to match size of target (7) File: D:/051501/key_/seg7_scan.v Line: 189
+Warning (10270): Verilog HDL Case Statement warning at seg7_scan.v(191): incomplete case statement has no default case item File: D:/051501/key_/seg7_scan.v Line: 191
+Warning (10235): Verilog HDL Always Construct warning at seg7_scan.v(207): variable "min" is read inside the Always Construct but isn't in the Always Construct's Event Control File: D:/051501/key_/seg7_scan.v Line: 207
+Warning (10230): Verilog HDL assignment warning at seg7_scan.v(207): truncated value with size 32 to match size of target (7) File: D:/051501/key_/seg7_scan.v Line: 207
+Warning (10270): Verilog HDL Case Statement warning at seg7_scan.v(209): incomplete case statement has no default case item File: D:/051501/key_/seg7_scan.v Line: 209
+Warning (10235): Verilog HDL Always Construct warning at seg7_scan.v(224): variable "hou" is read inside the Always Construct but isn't in the Always Construct's Event Control File: D:/051501/key_/seg7_scan.v Line: 224
+Warning (10230): Verilog HDL assignment warning at seg7_scan.v(224): truncated value with size 32 to match size of target (7) File: D:/051501/key_/seg7_scan.v Line: 224
+Warning (10270): Verilog HDL Case Statement warning at seg7_scan.v(226): incomplete case statement has no default case item File: D:/051501/key_/seg7_scan.v Line: 226
+Warning (10235): Verilog HDL Always Construct warning at seg7_scan.v(241): variable "hou" is read inside the Always Construct but isn't in the Always Construct's Event Control File: D:/051501/key_/seg7_scan.v Line: 241
+Warning (10230): Verilog HDL assignment warning at seg7_scan.v(241): truncated value with size 32 to match size of target (7) File: D:/051501/key_/seg7_scan.v Line: 241
+Warning (10270): Verilog HDL Case Statement warning at seg7_scan.v(243): incomplete case statement has no default case item File: D:/051501/key_/seg7_scan.v Line: 243
+Warning (10270): Verilog HDL Case Statement warning at seg7_scan.v(152): incomplete case statement has no default case item File: D:/051501/key_/seg7_scan.v Line: 152
+Info (10264): Verilog HDL Case Statement information at seg7_scan.v(152): all case item expressions in this case statement are onehot File: D:/051501/key_/seg7_scan.v Line: 152
+Warning (10240): Verilog HDL Always Construct warning at seg7_scan.v(150): inferring latch(es) for variable "val", which holds its previous value in one or more paths through the always construct File: D:/051501/key_/seg7_scan.v Line: 150
+Warning (10240): Verilog HDL Always Construct warning at seg7_scan.v(150): inferring latch(es) for variable "SEL", which holds its previous value in one or more paths through the always construct File: D:/051501/key_/seg7_scan.v Line: 150
+Warning (10240): Verilog HDL Always Construct warning at seg7_scan.v(150): inferring latch(es) for variable "DIG_OUT", which holds its previous value in one or more paths through the always construct File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "DIG_OUT[0]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "DIG_OUT[1]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "DIG_OUT[2]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "DIG_OUT[3]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "DIG_OUT[4]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "DIG_OUT[5]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "DIG_OUT[6]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "DIG_OUT[7]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "SEL[0]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "SEL[1]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "SEL[2]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "SEL[3]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "SEL[4]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Info (10041): Inferred latch for "SEL[5]" at seg7_scan.v(150) File: D:/051501/key_/seg7_scan.v Line: 150
+Warning (12125): Using design file music_top.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: music_top File: D:/051501/key_/music_top.v Line: 1
+Info (12128): Elaborating entity "music_top" for hierarchy "music_top:music" File: D:/051501/key_/key_clock.v Line: 32
+Warning (12125): Using design file music_hz.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: music_hz File: D:/051501/key_/music_hz.v Line: 1
+Info (12128): Elaborating entity "music_hz" for hierarchy "music_top:music|music_hz:hz0" File: D:/051501/key_/music_top.v Line: 131
+Warning (10230): Verilog HDL assignment warning at music_hz.v(12): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 12
+Warning (10230): Verilog HDL assignment warning at music_hz.v(13): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 13
+Warning (10230): Verilog HDL assignment warning at music_hz.v(14): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 14
+Warning (10230): Verilog HDL assignment warning at music_hz.v(15): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 15
+Warning (10230): Verilog HDL assignment warning at music_hz.v(16): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 16
+Warning (10230): Verilog HDL assignment warning at music_hz.v(17): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 17
+Warning (10230): Verilog HDL assignment warning at music_hz.v(18): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 18
+Warning (10230): Verilog HDL assignment warning at music_hz.v(19): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 19
+Warning (10230): Verilog HDL assignment warning at music_hz.v(20): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 20
+Warning (10230): Verilog HDL assignment warning at music_hz.v(21): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 21
+Warning (10230): Verilog HDL assignment warning at music_hz.v(22): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 22
+Warning (10230): Verilog HDL assignment warning at music_hz.v(23): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 23
+Warning (10230): Verilog HDL assignment warning at music_hz.v(24): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 24
+Warning (10230): Verilog HDL assignment warning at music_hz.v(25): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 25
+Warning (10230): Verilog HDL assignment warning at music_hz.v(26): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 26
+Warning (10230): Verilog HDL assignment warning at music_hz.v(27): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 27
+Warning (10230): Verilog HDL assignment warning at music_hz.v(28): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 28
+Warning (10230): Verilog HDL assignment warning at music_hz.v(29): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 29
+Warning (10230): Verilog HDL assignment warning at music_hz.v(30): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 30
+Warning (10230): Verilog HDL assignment warning at music_hz.v(31): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 31
+Warning (10230): Verilog HDL assignment warning at music_hz.v(32): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 32
+Warning (10230): Verilog HDL assignment warning at music_hz.v(33): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 33
+Warning (10230): Verilog HDL assignment warning at music_hz.v(34): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 34
+Warning (10230): Verilog HDL assignment warning at music_hz.v(35): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 35
+Warning (10230): Verilog HDL assignment warning at music_hz.v(36): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 36
+Warning (10230): Verilog HDL assignment warning at music_hz.v(37): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 37
+Warning (10230): Verilog HDL assignment warning at music_hz.v(38): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 38
+Warning (10230): Verilog HDL assignment warning at music_hz.v(39): truncated value with size 32 to match size of target (20) File: D:/051501/key_/music_hz.v Line: 39
+Warning (12125): Using design file music_rom.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: music_rom File: D:/051501/key_/music_rom.v Line: 39
+Info (12128): Elaborating entity "music_rom" for hierarchy "music_top:music|music_rom:hz_rom" File: D:/051501/key_/music_top.v Line: 138
+Info (12128): Elaborating entity "altsyncram" for hierarchy "music_top:music|music_rom:hz_rom|altsyncram:altsyncram_component" File: D:/051501/key_/music_rom.v Line: 81
+Info (12130): Elaborated megafunction instantiation "music_top:music|music_rom:hz_rom|altsyncram:altsyncram_component" File: D:/051501/key_/music_rom.v Line: 81
+Info (12133): Instantiated megafunction "music_top:music|music_rom:hz_rom|altsyncram:altsyncram_component" with the following parameter: File: D:/051501/key_/music_rom.v Line: 81
+    Info (12134): Parameter "address_aclr_a" = "NONE"
+    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
+    Info (12134): Parameter "init_file" = "../src/ipcore/music_hz.mif"
+    Info (12134): Parameter "intended_device_family" = "Cyclone IV E"
+    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info (12134): Parameter "lpm_type" = "altsyncram"
+    Info (12134): Parameter "numwords_a" = "512"
+    Info (12134): Parameter "operation_mode" = "ROM"
+    Info (12134): Parameter "outdata_aclr_a" = "NONE"
+    Info (12134): Parameter "outdata_reg_a" = "CLOCK0"
+    Info (12134): Parameter "widthad_a" = "9"
+    Info (12134): Parameter "width_a" = "8"
+    Info (12134): Parameter "width_byteena_a" = "1"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_hka1.tdf
+    Info (12023): Found entity 1: altsyncram_hka1 File: D:/051501/key_/db/altsyncram_hka1.tdf Line: 27
+Info (12128): Elaborating entity "altsyncram_hka1" for hierarchy "music_top:music|music_rom:hz_rom|altsyncram:altsyncram_component|altsyncram_hka1:auto_generated" File: c:/intelfpga/18.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
+Warning (12125): Using design file music_time_rom.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: music_time_rom File: D:/051501/key_/music_time_rom.v Line: 39
+Info (12128): Elaborating entity "music_time_rom" for hierarchy "music_top:music|music_time_rom:time_rom" File: D:/051501/key_/music_top.v Line: 146
+Info (12128): Elaborating entity "altsyncram" for hierarchy "music_top:music|music_time_rom:time_rom|altsyncram:altsyncram_component" File: D:/051501/key_/music_time_rom.v Line: 81
+Info (12130): Elaborated megafunction instantiation "music_top:music|music_time_rom:time_rom|altsyncram:altsyncram_component" File: D:/051501/key_/music_time_rom.v Line: 81
+Info (12133): Instantiated megafunction "music_top:music|music_time_rom:time_rom|altsyncram:altsyncram_component" with the following parameter: File: D:/051501/key_/music_time_rom.v Line: 81
+    Info (12134): Parameter "address_aclr_a" = "NONE"
+    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
+    Info (12134): Parameter "init_file" = "../src/ipcore/music_time.mif"
+    Info (12134): Parameter "intended_device_family" = "Cyclone IV E"
+    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info (12134): Parameter "lpm_type" = "altsyncram"
+    Info (12134): Parameter "numwords_a" = "512"
+    Info (12134): Parameter "operation_mode" = "ROM"
+    Info (12134): Parameter "outdata_aclr_a" = "NONE"
+    Info (12134): Parameter "outdata_reg_a" = "CLOCK0"
+    Info (12134): Parameter "widthad_a" = "9"
+    Info (12134): Parameter "width_a" = "8"
+    Info (12134): Parameter "width_byteena_a" = "1"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_uqa1.tdf
+    Info (12023): Found entity 1: altsyncram_uqa1 File: D:/051501/key_/db/altsyncram_uqa1.tdf Line: 27
+Info (12128): Elaborating entity "altsyncram_uqa1" for hierarchy "music_top:music|music_time_rom:time_rom|altsyncram:altsyncram_component|altsyncram_uqa1:auto_generated" File: c:/intelfpga/18.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
+Info (278001): Inferred 4 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "seg7_scan:U2|Mod0" File: D:/051501/key_/seg7_scan.v Line: 155
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "seg7_scan:U2|Mod1" File: D:/051501/key_/seg7_scan.v Line: 189
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "seg7_scan:U2|Mod2" File: D:/051501/key_/seg7_scan.v Line: 224
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "music_top:music|Mult0" File: D:/051501/key_/music_top.v Line: 72
+Info (12130): Elaborated megafunction instantiation "seg7_scan:U2|lpm_divide:Mod0" File: D:/051501/key_/seg7_scan.v Line: 155
+Info (12133): Instantiated megafunction "seg7_scan:U2|lpm_divide:Mod0" with the following parameter: File: D:/051501/key_/seg7_scan.v Line: 155
+    Info (12134): Parameter "LPM_WIDTHN" = "6"
+    Info (12134): Parameter "LPM_WIDTHD" = "4"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_k9m.tdf
+    Info (12023): Found entity 1: lpm_divide_k9m File: D:/051501/key_/db/lpm_divide_k9m.tdf Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_9kh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_9kh File: D:/051501/key_/db/sign_div_unsign_9kh.tdf Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_64f.tdf
+    Info (12023): Found entity 1: alt_u_div_64f File: D:/051501/key_/db/alt_u_div_64f.tdf Line: 26
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_7pc.tdf
+    Info (12023): Found entity 1: add_sub_7pc File: D:/051501/key_/db/add_sub_7pc.tdf Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_8pc.tdf
+    Info (12023): Found entity 1: add_sub_8pc File: D:/051501/key_/db/add_sub_8pc.tdf Line: 22
+Info (12130): Elaborated megafunction instantiation "seg7_scan:U2|lpm_divide:Mod2" File: D:/051501/key_/seg7_scan.v Line: 224
+Info (12133): Instantiated megafunction "seg7_scan:U2|lpm_divide:Mod2" with the following parameter: File: D:/051501/key_/seg7_scan.v Line: 224
+    Info (12134): Parameter "LPM_WIDTHN" = "6"
+    Info (12134): Parameter "LPM_WIDTHD" = "4"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12130): Elaborated megafunction instantiation "music_top:music|lpm_mult:Mult0" File: D:/051501/key_/music_top.v Line: 72
+Info (12133): Instantiated megafunction "music_top:music|lpm_mult:Mult0" with the following parameter: File: D:/051501/key_/music_top.v Line: 72
+    Info (12134): Parameter "LPM_WIDTHA" = "8"
+    Info (12134): Parameter "LPM_WIDTHB" = "23"
+    Info (12134): Parameter "LPM_WIDTHP" = "31"
+    Info (12134): Parameter "LPM_WIDTHR" = "31"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "YES"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
+Info (12131): Elaborated megafunction instantiation "music_top:music|lpm_mult:Mult0|multcore:mult_core", which is child of megafunction instantiation "music_top:music|lpm_mult:Mult0" File: c:/intelfpga/18.0/quartus/libraries/megafunctions/lpm_mult.tdf Line: 308
+Info (12131): Elaborated megafunction instantiation "music_top:music|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "music_top:music|lpm_mult:Mult0" File: c:/intelfpga/18.0/quartus/libraries/megafunctions/multcore.tdf Line: 228
+Info (12131): Elaborated megafunction instantiation "music_top:music|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]", which is child of megafunction instantiation "music_top:music|lpm_mult:Mult0" File: c:/intelfpga/18.0/quartus/libraries/megafunctions/mpar_add.tdf Line: 78
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_rgh.tdf
+    Info (12023): Found entity 1: add_sub_rgh File: D:/051501/key_/db/add_sub_rgh.tdf Line: 22
+Info (12131): Elaborated megafunction instantiation "music_top:music|lpm_mult:Mult0|altshift:external_latency_ffs", which is child of megafunction instantiation "music_top:music|lpm_mult:Mult0" File: c:/intelfpga/18.0/quartus/libraries/megafunctions/lpm_mult.tdf Line: 351
+Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning (13012): Latch seg7_scan:U2|DIG_OUT[0] has unsafe behavior File: D:/051501/key_/seg7_scan.v Line: 150
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal seg7_scan:U2|current_state.SEL_hou0 File: D:/051501/key_/seg7_scan.v Line: 16
+Warning (13012): Latch seg7_scan:U2|DIG_OUT[1] has unsafe behavior File: D:/051501/key_/seg7_scan.v Line: 150
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal seg7_scan:U2|current_state.SEL_hou0 File: D:/051501/key_/seg7_scan.v Line: 16
+Warning (13012): Latch seg7_scan:U2|DIG_OUT[2] has unsafe behavior File: D:/051501/key_/seg7_scan.v Line: 150
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal seg7_scan:U2|current_state.SEL_hou0 File: D:/051501/key_/seg7_scan.v Line: 16
+Warning (13012): Latch seg7_scan:U2|DIG_OUT[3] has unsafe behavior File: D:/051501/key_/seg7_scan.v Line: 150
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal seg7_scan:U2|current_state.SEL_hou0 File: D:/051501/key_/seg7_scan.v Line: 16
+Warning (13012): Latch seg7_scan:U2|DIG_OUT[4] has unsafe behavior File: D:/051501/key_/seg7_scan.v Line: 150
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal seg7_scan:U2|current_state.SEL_hou0 File: D:/051501/key_/seg7_scan.v Line: 16
+Warning (13012): Latch seg7_scan:U2|DIG_OUT[5] has unsafe behavior File: D:/051501/key_/seg7_scan.v Line: 150
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal seg7_scan:U2|current_state.SEL_hou0 File: D:/051501/key_/seg7_scan.v Line: 16
+Warning (13012): Latch seg7_scan:U2|DIG_OUT[6] has unsafe behavior File: D:/051501/key_/seg7_scan.v Line: 150
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal seg7_scan:U2|current_state.SEL_hou0 File: D:/051501/key_/seg7_scan.v Line: 16
+Warning (13012): Latch seg7_scan:U2|DIG_OUT[7] has unsafe behavior File: D:/051501/key_/seg7_scan.v Line: 150
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal seg7_scan:U2|current_state.SEL_hou0 File: D:/051501/key_/seg7_scan.v Line: 16
+Info (13000): Registers with preset signals will power-up high File: D:/051501/key_/key_scan.v Line: 50
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 2 registers lost all their fanouts during netlist optimizations.
+Info (144001): Generated suppressed messages file D:/051501/key_/output_files/key_clock.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 2 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "key1" File: D:/051501/key_/key_clock.v Line: 2
+    Warning (15610): No output dependent on input pin "key2" File: D:/051501/key_/key_clock.v Line: 2
+Info (21057): Implemented 1009 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 8 input pins
+    Info (21059): Implemented 39 output pins
+    Info (21061): Implemented 946 logic cells
+    Info (21064): Implemented 16 RAM segments
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 87 warnings
+    Info: Peak virtual memory: 4782 megabytes
+    Info: Processing ended: Sun May 21 12:01:23 2023
+    Info: Elapsed time: 00:00:24
+    Info: Total CPU time (on all processors): 00:00:37
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in D:/051501/key_/output_files/key_clock.map.smsg.
+
+

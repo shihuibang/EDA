@@ -1,0 +1,3 @@
+Warning (10268): Verilog HDL information at seg7_scan.v(150): always construct contains both blocking and non-blocking assignments File: D:/051501/key_/seg7_scan.v Line: 150
+Warning (10268): Verilog HDL information at key_scan.v(130): always construct contains both blocking and non-blocking assignments File: D:/051501/key_/key_scan.v Line: 130
+Warning (10268): Verilog HDL information at control.v(13): always construct contains both blocking and non-blocking assignments File: D:/051501/key_/control.v Line: 13

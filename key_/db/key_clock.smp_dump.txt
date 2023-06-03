@@ -1,0 +1,17 @@
+
+State Machine - |key_clock|music_top:music|state
+Name state.PLAY_END state.PLAY_WAIT state.PLAY state.IDLE 
+state.IDLE 0 0 0 0 
+state.PLAY 0 0 1 1 
+state.PLAY_WAIT 0 1 0 1 
+state.PLAY_END 1 0 0 1 
+
+State Machine - |key_clock|seg7_scan:U2|current_state
+Name current_state.SEL0 current_state.SEL_sec0 current_state.SEL_sec1 current_state.SEL_min0 current_state.SEL_min1 current_state.SEL_hou0 current_state.SEL_hou1 
+current_state.SEL0 0 0 0 0 0 0 0 
+current_state.SEL_sec1 1 0 1 0 0 0 0 
+current_state.SEL_min0 1 0 0 1 0 0 0 
+current_state.SEL_min1 1 0 0 0 1 0 0 
+current_state.SEL_hou0 1 0 0 0 0 1 0 
+current_state.SEL_hou1 1 0 0 0 0 0 1 
+current_state.SEL_sec0 1 1 0 0 0 0 0 

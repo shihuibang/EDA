@@ -1,0 +1,152 @@
+module  seg7_scan(clk_4Khz,clk_1hz,rst_n,key_val,DIG_OUT,SEL);
+	
+	input clk_4Khz,rst_n,clk_1hz;
+	input [3:0] key_val;
+	output reg[7:0] DIG_OUT;
+	output reg[5:0] SEL;
+	reg[3:0] sec = 12,min = 12 ,hou = 12,val;
+	reg [5:0] current_state,next_state;
+	
+	parameter SEL0 = 6'b11_1111;
+	parameter SEL_sec0 = 6'b01_1111;
+	parameter SEL_sec1 = 6'b10_1111;
+	parameter SEL_min0 = 6'b11_0111;
+	parameter SEL_min1 = 6'b11_1011;
+	parameter SEL_hou0 = 6'b11_1101;
+	parameter SEL_hou1 = 6'b11_1110;
+	
+	always @(posedge clk_4Khz or negedge rst_n)begin
+		if(!rst_n)
+			current_state <= SEL0;
+		else
+			current_state <= next_state;
+		
+	end
+	
+	always @(current_state)begin
+		case(current_state)
+			SEL0:next_state = SEL_sec0;
+			SEL_sec0:next_state = SEL_sec1;
+			SEL_sec1:next_state = SEL_min0;
+			SEL_min0:next_state = SEL_min1;
+			SEL_min1:next_state = SEL_hou0;
+			SEL_hou0:next_state = SEL_hou1;
+			SEL_hou1:next_state = SEL0;
+		endcase
+	end
+	
+	always @(current_state)begin
+		case(current_state)
+			SEL_sec0:
+				begin
+					val = sec % 10;
+					SEL = SEL_sec0;
+					case(val)
+						4'd0: DIG_OUT <= 8'b1100_0000;//0
+						4'd1: DIG_OUT <= 8'b1111_1001;//1
+						4'd2: DIG_OUT <= 8'b1010_0100;//2
+						4'd3: DIG_OUT <= 8'b1011_0000;//3
+						4'd4: DIG_OUT <= 8'b1001_1001;//4
+						4'd5: DIG_OUT <= 8'b1001_0010;//5
+						4'd6: DIG_OUT <= 8'b1000_0010;//6
+						4'd7: DIG_OUT <= 8'b1111_1000;//7
+						4'd8: DIG_OUT <= 8'b1000_0000;//8
+						4'd9: DIG_OUT <= 8'b1001_0000;//9
+					endcase
+				end
+			SEL_sec1:
+				begin
+					val = sec / 10;
+					SEL = SEL_sec1;
+					case(val)
+						4'd0: DIG_OUT <= 8'b0100_0000;//0
+						4'd1: DIG_OUT <= 8'b0111_1001;//1
+						4'd2: DIG_OUT <= 8'b0010_0100;//2
+						4'd3: DIG_OUT <= 8'b0011_0000;//3
+						4'd4: DIG_OUT <= 8'b0001_1001;//4
+						4'd5: DIG_OUT <= 8'b0001_0010;//5
+						4'd6: DIG_OUT <= 8'b0000_0010;//6
+						4'd7: DIG_OUT <= 8'b0111_1000;//7
+						4'd8: DIG_OUT <= 8'b0000_0000;//8
+						4'd9: DIG_OUT <= 8'b0001_0000;//9
+					endcase
+				end
+			SEL_min0:
+				begin
+					val = min % 10;
+					SEL = SEL_min0;
+					case(val)
+						4'd0: DIG_OUT <= 8'b0100_0000;//0
+						4'd1: DIG_OUT <= 8'b0111_1001;//1
+						4'd2: DIG_OUT <= 8'b0010_0100;//2
+						4'd3: DIG_OUT <= 8'b0011_0000;//3
+						4'd4: DIG_OUT <= 8'b0001_1001;//4
+						4'd5: DIG_OUT <= 8'b0001_0010;//5
+						4'd6: DIG_OUT <= 8'b0000_0010;//6
+						4'd7: DIG_OUT <= 8'b0111_1000;//7
+						4'd8: DIG_OUT <= 8'b0000_0000;//8
+						4'd9: DIG_OUT <= 8'b0001_0000;//9
+					endcase
+				end
+			
+			SEL_min1:
+				begin
+					val = min / 10;
+					SEL = SEL_min1;
+					case(val)
+						4'd0: DIG_OUT <= 8'b0100_0000;//0
+						4'd1: DIG_OUT <= 8'b0111_1001;//1
+						4'd2: DIG_OUT <= 8'b0010_0100;//2
+						4'd3: DIG_OUT <= 8'b0011_0000;//3
+						4'd4: DIG_OUT <= 8'b0001_1001;//4
+						4'd5: DIG_OUT <= 8'b0001_0010;//5
+						4'd6: DIG_OUT <= 8'b0000_0010;//6
+						4'd7: DIG_OUT <= 8'b0111_1000;//7
+						4'd8: DIG_OUT <= 8'b0000_0000;//8
+						4'd9: DIG_OUT <= 8'b0001_0000;//9
+					endcase
+				end
+			SEL_hou0:
+				begin
+					val = hou % 10;
+					SEL = SEL_hou0;
+					case(val)
+						4'd0: DIG_OUT <= 8'b0100_0000;//0
+						4'd1: DIG_OUT <= 8'b0111_1001;//1
+						4'd2: DIG_OUT <= 8'b0010_0100;//2
+						4'd3: DIG_OUT <= 8'b0011_0000;//3
+						4'd4: DIG_OUT <= 8'b0001_1001;//4
+						4'd5: DIG_OUT <= 8'b0001_0010;//5
+						4'd6: DIG_OUT <= 8'b0000_0010;//6
+						4'd7: DIG_OUT <= 8'b0111_1000;//7
+						4'd8: DIG_OUT <= 8'b0000_0000;//8
+						4'd9: DIG_OUT <= 8'b0001_0000;//9
+					endcase
+				end
+			SEL_hou1:
+				begin
+					val = hou / 10;
+					SEL = SEL_hou1;
+					case(val)
+						4'd0: DIG_OUT <= 8'b0100_0000;//0
+						4'd1: DIG_OUT <= 8'b0111_1001;//1
+						4'd2: DIG_OUT <= 8'b0010_0100;//2
+						4'd3: DIG_OUT <= 8'b0011_0000;//3
+						4'd4: DIG_OUT <= 8'b0001_1001;//4
+						4'd5: DIG_OUT <= 8'b0001_0010;//5
+						4'd6: DIG_OUT <= 8'b0000_0010;//6
+						4'd7: DIG_OUT <= 8'b0111_1000;//7
+						4'd8: DIG_OUT <= 8'b0000_0000;//8
+						4'd9: DIG_OUT <= 8'b0001_0000;//9
+					endcase
+				end
+		endcase
+	end
+	
+	
+	
+	
+	
+
+	
+endmodule

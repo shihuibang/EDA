@@ -1,0 +1,73 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/051501/key_/simulation/qsim
+vhard_block
+Z1 !s110 1684323415
+!i10b 1
+!s100 lilNY1bhjX7PQgD1Aa9;g1
+IWJbWMI5[WjN0IM77[Dg<N0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1684323411
+Z4 8key_clock.vo
+Z5 Fkey_clock.vo
+L0 13003
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1684323415.000000
+Z8 !s107 key_clock.vo|
+Z9 !s90 -work|work|key_clock.vo|
+!i113 1
+Z10 o-work work
+Z11 tCvgOpt 0
+vkey_clock
+R1
+!i10b 1
+!s100 @:lJRc3_`1DdIIOD_XGn:2
+I?oiGQcg?Qb5on6Pi0GIY_0
+R2
+R0
+R3
+R4
+R5
+L0 31
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vkey_clock_vlg_vec_tst
+R1
+!i10b 1
+!s100 TTmjNDAfIK[L9AMI?5[921
+I1@MB^D5BcRLU_Co3>DD7m2
+R2
+R0
+w1684323407
+8Waveform.vwf.vt
+FWaveform.vwf.vt
+L0 29
+R6
+r1
+!s85 0
+31
+R7
+!s107 Waveform.vwf.vt|
+!s90 -work|work|Waveform.vwf.vt|
+!i113 1
+R10
+R11

@@ -1,0 +1,99 @@
+module key_scan(clk_25hz,clk_4Khz,rst_n,key_col,key_row,key_vale);
+	
+	input clk_25hz,clk_4Khz,rst_n;
+	input [3:0] key_col;
+	output reg[3:0] key_row;
+	output reg[3:0] key_vale;
+	
+	parameter IDLE = 5'b00001, row1_scan = 5'b00010, row2_scan = 5'b00100, row3_scan = 5'b01000, row4_scan = 5'b10000; 
+	
+	reg[4:0] c_st, n_st;
+	reg cnt;
+	
+	always@(posedge clk_4Khz or negedge rst_n) begin
+			if(!rst_n)
+				c_st <= IDLE;
+			else
+				c_st <= n_st;
+		end
+	always@(posedge clk_25hz or negedge rst_n) begin
+			if(!rst_n)
+				cnt <= 0;
+			else
+				cnt <= ~cnt;
+		end
+		
+	always@(c_st) 
+	 begin
+		case(c_st)
+			IDLE: n_st = row1_scan;
+			row1_scan: 
+				begin 
+					key_row = 4'b0111;
+					n_st = row2_scan;
+				end
+			row2_scan: 
+				begin 
+					key_row = 4'b1011;
+					n_st = row3_scan;
+				end
+			row3_scan: 
+				begin 
+					key_row = 4'b1101;
+					n_st = row4_scan;
+				end
+			row4_scan: 
+				begin 
+					key_row = 4'b1110;
+					n_st = row1_scan;
+				end
+			default: n_st = IDLE;
+		endcase
+	 end
+	 
+	 always@(c_st)
+		begin
+		  case(c_st)
+			//IDLE: n_st = row1_scan;
+			row1_scan: 
+				begin 
+					case(key_col)
+						4'b0111 : if (cnt) key_vale = 0;
+						4'b1011 : if (cnt) key_vale = 1;
+						4'b1101 : if (cnt) key_vale = 2;
+						4'b1110 : key_vale = 3;
+					endcase
+				end
+			row2_scan: 
+				begin 
+					case(key_col)
+						4'b0111 : key_vale = 4;
+						4'b1011 : key_vale = 5;
+						4'b1101 : key_vale = 6;
+						4'b1110 : key_vale = 7;
+					endcase
+				end
+			row3_scan: 
+				begin 
+					case(key_col)
+						4'b0111 : key_vale = 8;
+						4'b1011 : key_vale = 9;
+						4'b1101 : key_vale = 10;
+						4'b1110 : key_vale = 11;
+					endcase
+				end
+			row4_scan: 
+				begin 
+					case(key_col)
+						4'b0111 : key_vale = 12;
+						4'b1011 : key_vale = 13;
+						4'b1101 : key_vale = 14;
+						4'b1110 : key_vale = 15;
+					endcase
+				end
+			//default: n_st = IDLE;
+		endcase
+	 end
+	
+
+endmodule
